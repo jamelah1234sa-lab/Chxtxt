@@ -6,138 +6,187 @@
     <title>تيدكس عكاظ | TEDx Okadh 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --ted-red: #e62b1e; --gold: #d4af37; --black: #050505; }
-        body { margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; background: var(--black); color: #fff; overflow-x: hidden; }
+        :root { --ted-red: #e62b1e; --dark: #000; --card: #0c0c0c; }
+        body { margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; background: var(--dark); color: #fff; line-height: 1.8; overflow-x: hidden; }
         
-        /* تأثير الإضاءة السينمائية */
-        .hero-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 600px; background: radial-gradient(circle, rgba(230,43,30,0.15) 0%, transparent 70%); z-index: -1; }
+        /* التنسيقات العامة */
+        section { max-width: 1100px; margin: 80px auto; padding: 0 20px; }
+        .section-header { font-size: 2.2rem; font-weight: 900; color: var(--ted-red); border-right: 8px solid var(--ted-red); padding-right: 20px; margin-bottom: 40px; }
+        .full-card { background: var(--card); border: 1px solid #1a1a1a; padding: 40px; border-radius: 25px; margin-bottom: 30px; transition: 0.3s; }
+        .full-card:hover { border-color: var(--ted-red); }
+        .highlight { color: var(--ted-red); font-weight: 800; }
 
-        /* الغلاف الرئيسي */
-        header { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-bottom: 3px solid var(--ted-red); position: relative; }
-        .logo-box { border: 2px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 30px; backdrop-filter: blur(10px); background: rgba(0,0,0,0.5); }
-        .logo-main { font-size: clamp(3rem, 12vw, 6rem); font-weight: 900; color: var(--ted-red); margin: 0; line-height: 1; }
+        /* الغلاف */
+        header { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at center, #1a0202 0%, #000 100%); border-bottom: 4px solid var(--ted-red); padding: 20px; }
+        .logo-main { font-size: clamp(3rem, 10vw, 5.5rem); font-weight: 900; color: var(--ted-red); margin: 10px 0; }
         .logo-main span { color: #fff; }
         
-        /* قسم الأرقام القوية (Counter Section) */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; width: 100%; max-width: 1100px; margin-top: 50px; }
-        .stat-card { background: linear-gradient(145deg, #111, #000); padding: 30px; border-radius: 20px; border-top: 4px solid var(--ted-red); transition: 0.4s; }
-        .stat-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(230,43,30,0.2); }
-        .stat-num { font-size: 3.5rem; font-weight: 900; color: #fff; display: block; }
-        .stat-label { color: var(--ted-red); font-weight: 700; font-size: 1.1rem; }
+        /* شبكة الأرقام القوية */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; width: 100%; max-width: 1000px; margin-top: 50px; }
+        .stat-item { background: #080808; padding: 30px; border-radius: 20px; border: 1px solid #1a1a1a; text-align: center; }
+        .stat-num { font-size: 3rem; font-weight: 900; color: var(--ted-red); display: block; }
 
-        /* قسم الإعلام (Media Highlights) */
-        .media-bar { background: #111; padding: 20px 0; border-y: 1px solid #222; overflow: hidden; white-space: nowrap; margin: 40px 0; }
-        .media-track { display: inline-block; animation: scroll 30s linear infinite; }
-        .media-name { color: #555; font-size: 1.5rem; font-weight: 800; margin: 0 40px; text-transform: uppercase; }
-        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(50%); } }
+        /* شبكة المتحدثين */
+        .speakers-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-top: 30px; }
+        .speaker-box { background: #111; padding: 15px; border-radius: 10px; border-right: 4px solid var(--ted-red); font-size: 0.95rem; }
 
-        /* الأقسام التفصيلية */
-        section { max-width: 1200px; margin: 100px auto; padding: 0 20px; }
-        .title-reveal { font-size: 3rem; font-weight: 900; color: var(--ted-red); margin-bottom: 40px; position: relative; }
-        .title-reveal::before { content: ""; position: absolute; right: -20px; top: 0; width: 10px; height: 100%; background: var(--ted-red); }
+        /* شريط الميديا */
+        .media-ticker { background: #050505; border-y: 1px solid #111; padding: 20px 0; overflow: hidden; white-space: nowrap; margin: 40px 0; }
+        .media-content { display: inline-block; animation: ticker 40s linear infinite; }
+        .media-content span { font-weight: 900; font-size: 1.4rem; color: #444; margin: 0 40px; }
+        @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(100%); } }
 
-        .glass-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 40px; border-radius: 24px; backdrop-filter: blur(12px); }
-        
-        /* باقات الرعاية بصيغة "Premium" */
-        .premium-card { background: linear-gradient(to bottom, #1a1a1a, #050505); border: 1px solid var(--ted-red); padding: 50px; border-radius: 30px; position: relative; overflow: hidden; }
-        .premium-card::after { content: "TOP SPONSOR"; position: absolute; top: 20px; left: -30px; background: var(--ted-red); padding: 5px 40px; transform: rotate(-45deg); font-size: 0.7rem; font-weight: 900; }
+        /* العد التنازلي */
+        .timer { display: flex; gap: 15px; margin-top: 30px; }
+        .unit { background: var(--ted-red); color: #fff; padding: 15px; border-radius: 12px; min-width: 80px; }
+        .unit b { font-size: 2rem; display: block; }
 
-        /* العداد التنازلي */
-        .timer-wrap { display: flex; gap: 15px; margin: 40px 0; }
-        .timer-unit { background: #000; border: 1px solid #333; padding: 15px; border-radius: 12px; min-width: 80px; }
-        .timer-val { font-size: 2rem; font-weight: 900; color: var(--ted-red); display: block; }
-
-        footer { text-align: center; padding: 80px 20px; background: #000; border-top: 1px solid #111; }
-        .btn-strong { background: var(--ted-red); color: #fff; padding: 20px 60px; border-radius: 12px; font-weight: 900; text-decoration: none; font-size: 1.3rem; box-shadow: 0 10px 40px rgba(230,43,30,0.4); transition: 0.3s; }
+        footer { background: #050505; padding: 80px 20px; text-align: center; border-top: 4px solid var(--ted-red); }
     </style>
 </head>
 <body>
-    <div class="hero-glow"></div>
 
     <header>
-        <div class="logo-box">
-            <p style="letter-spacing: 4px; font-weight: 300; margin-bottom: 10px; color: #888;">شركة محتوى | سفراء رياديون</p>
-            <h1 class="logo-main">TEDx<span>Okadh</span></h1>
-            <p style="font-size: 1.5rem; color: #fff; font-weight: 400;">مايو 2026 | "ابتكار وأفكار تستحق الانتشار"</p>
+        <p style="letter-spacing: 4px; font-weight: 300;">شركة محتوى | مؤسسة سفراء رياديون</p>
+        <h1 class="logo-main">TEDx<span>Okadh</span></h1>
+        <h2 style="font-size: 1.8rem; margin: 20px 0;">"ابتكار وأفكار تستحق الانتشار"</h2>
+        <p style="max-width: 750px; color: #aaa; font-size: 1.2rem;">حيث تتصافح عراقة التاريخ مع رؤى المستقبل، ويلتقي سحر الكلمة بعمق الفكرة في جوهرة الحجاز.</p>
+        
+        <div class="timer">
+            <div class="unit"><b id="d">00</b> يوم</div>
+            <div class="unit"><b id="h">00</b> ساعة</div>
+            <div class="unit"><b id="m">00</b> دقيقة</div>
+            <div class="unit"><b id="s">00</b> ثانية</div>
         </div>
 
         <div class="stats-grid">
-            <div class="stat-card"><span class="stat-num">+100</span><span class="stat-label">إعلامي ومؤثر</span></div>
-            <div class="stat-card"><span class="stat-num">700+</span><span class="stat-label">حضور النسخة الأولى</span></div>
-            <div class="stat-card"><span class="stat-num">24</span><span class="stat-label">ملهم وصانع أثر</span></div>
-            <div class="stat-card"><span class="stat-num">ملايين</span><span class="stat-label">المشاهدات الرقمية</span></div>
-        </div>
-
-        <div class="timer-wrap">
-            <div class="timer-unit"><span id="d" class="timer-val">00</span><small>يوم</small></div>
-            <div class="timer-unit"><span id="h" class="timer-val">00</span><small>ساعة</small></div>
-            <div class="timer-unit"><span id="m" class="timer-val">00</span><small>دقيقة</small></div>
-            <div class="timer-unit"><span id="s" class="timer-val">00</span><small>ثانية</small></div>
+            <div class="stat-item"><span class="stat-num">+100</span> إعلامي ومؤثر</div>
+            <div class="stat-item"><span class="stat-num">700+</span> حضور النسخة الأولى</div>
+            <div class="stat-item"><span class="stat-num">+300K</span> مشاهدات رقمية</div>
+            <div class="stat-item"><span class="stat-num">24</span> ملهماً وصانع أثر</div>
         </div>
     </header>
 
-    <div class="media-bar">
-        <div class="media-track">
-            <span class="media-name">MBC GROUP</span><span class="media-name">قناة السعودية</span>
-            <span class="media-name">الإخبارية</span><span class="media-name">وكالة واس</span>
-            <span class="media-name">صحيفة الرياض</span><span class="media-name">صحيفة الوطن</span>
-            <span class="media-name">الجزيرة</span><span class="media-name">تيدكس عكاظ</span>
-            <span class="media-name">MBC GROUP</span><span class="media-name">قناة السعودية</span>
-            <span class="media-name">الإخبارية</span><span class="media-name">وكالة واس</span>
+    <section>
+        <div class="section-header">الرؤية والهوية</div>
+        <div class="full-card">
+            <p><span class="highlight">الرؤية:</span> كما كان "عكاظ" قديماً منبراً لأساطير الكلمة والشعر، نُعيد اليوم إحياء هذا الإرث عبر منصة TEDx العالمية، لنصنع مسرحاً تتلاقى فيه العقول والمواهب لتبادل "أفكار تستحق الانتشار"، إسهاماً في صناعة وعي مستدام يعانق مستهدفات رؤية المملكة 2030.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div class="full-card">
+                <h4 class="highlight">نقطة الالتقاء (Crossroads)</h4>
+                <p>خطوط تتقاطع في المنتصف ثم تنطلق للخارج، لتمثل "سوق عكاظ الحديث" كمركز تتقاطع فيه الخبرات التقنية والفنية والعلمية.</p>
+            </div>
+            <div class="full-card">
+                <h4 class="highlight">بوصلة المستقبل</h4>
+                <p>الشعار يعمل كمحرك بصري يجسد كيف لفكرة محلية واحدة أن تدور وتنتشر لتحدث أثراً عالمياً.</p>
+            </div>
+            <div class="full-card">
+                <h4 class="highlight">الشرارة المضيئة</h4>
+                <p>التدرج من الأسود إلى الأحمر يعزز مفهوم "الإضاءة وسط الظلام"، كتعبير عن تسليط الضوء على الأفكار اللامعة.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="media-ticker">
+        <div class="media-content">
+            <span>MBC GROUP</span> <span>قناة السعودية</span> <span>الإخبارية</span> <span>وكالة واس</span> 
+            <span>صحيفة الرياض</span> <span>صحيفة الجزيرة</span> <span>صحيفة الوطن</span>
+            <span>MBC GROUP</span> <span>قناة السعودية</span> <span>الإخبارية</span> <span>وكالة واس</span>
         </div>
     </div>
 
     <section>
-        <div class="title-reveal">الرؤية والمسيرة</div>
-        <div class="glass-card" style="font-size: 1.4rem; line-height: 2;">
-            [span_0](start_span)كما كان <span style="color:var(--ted-red); font-weight:900;">"عكاظ"</span> منبراً لأساطير الكلمة، نُعيد اليوم إحياء هذا الإرث عبر <span style="font-weight:900;">TEDx</span>، لنصنع مسرحاً تتقاطع فيه الخبرات التقنية والفنية لتنطلق منها الأفكار للعالمية، إسهاماً في رؤية <span style="border-bottom: 2px solid var(--ted-red);">المملكة 2030</span>.[span_0](end_span)
+        <div class="section-header">مسيرة الأثر (تسلسل زمني)</div>
+        <div class="full-card">
+            <p>• <span class="highlight">2020 - 2021 | البذور الأولى:</span> تنظيم أكثر من 38 فعالية ومنتدى دولي ومحلي (لندن - الرياض).</p>
+            <p>• <span class="highlight">2022 | مصافحة تيدكس الأولى:</span> مؤتمر "TEDx الشرق الأوسط العربي" بالرياض بحضور نخبوي تجاوز 500 شخص.</p>
+            <p>• <span class="highlight">2024 | أرض الأصالة:</span> تيدكس عكاظ بالطائف بحضور تجاوز 700 شخص وتواجد أصحاب السمو والمعالي.</p>
+            <p>• <span class="highlight">2025 | نسخة "آنية الإلهام":</span> ترسيخ مكانة المؤتمر كأهم حدث معرفي في المنطقة.</p>
+            <p>• <span class="highlight">2026 | النسخة الثالثة:</span> الحدث الأضخم بابتكارات وأفكار استثنائية (قريباً).</p>
         </div>
     </section>
 
     <section>
-        <div class="title-reveal">باقات الامتياز</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-            <div class="premium-card">
-                <h2 style="font-size: 2.5rem; margin: 0;">الشريك الاستراتيجي</h2>
-                <div style="font-size: 3rem; font-weight: 900; color: var(--ted-red); margin: 20px 0;">50,000 <small style="font-size: 1rem;">SAR</small></div>
-                <ul style="color: #aaa; padding-right: 20px;">
-                    [span_1](start_span)<li>مساحة مكانية مميزة بواجهة الفعالية[span_1](end_span)</li>
-                    [span_2](start_span)<li>إدراج الشعار في كافة المطبوعات والإعلانات[span_2](end_span)</li>
-                    [span_3](start_span)<li>تكريم خاص على المسرح في الختام[span_3](end_span)</li>
-                </ul>
+        <div class="section-header">صناع الإلهام (الذين أثروا منصتنا)</div>
+        <div class="speakers-container">
+            <div class="speaker-box">د. فارس المالكي</div> <div class="speaker-box">أ. سعاد الموسى</div>
+            <div class="speaker-box">أ. أحمد الشمراني</div> <div class="speaker-box">أ. عبدالرؤوف مالكي</div>
+            <div class="speaker-box">فايز المالكي</div> <div class="speaker-box">محمد نور</div>
+            <div class="speaker-box">أ. ياسر الحزيمي</div> <div class="speaker-box">أ.د. أمل الهزاني</div>
+            <div class="speaker-box">د. طلال المغربي</div> <div class="speaker-box">د. علي الشاعري</div>
+            <div class="speaker-box">د. سعيد العمودي</div> <div class="speaker-box">د. عبير الألمعي</div>
+            <div class="speaker-box">د. مشاعل السهلي</div> <div class="speaker-box">د. عبدالله رشاد</div>
+            <div class="speaker-box">الشيف سما جاد</div> <div class="speaker-box">ناديه سعدون</div>
+            <div class="speaker-box">أ. سمارا الغامدي</div> <div class="speaker-box">أ. دلال العصيمي</div>
+            <div class="speaker-box">أ. عبدالله بن زنان</div> <div class="speaker-box">أ. بدور ابراهيم</div>
+            <div class="speaker-box">أ. عطا الله الجعيد</div> <div class="speaker-box">م. نرجس قاري</div>
+            <div class="speaker-box">م. ناصر الخالدي</div> <div class="speaker-box">م. محمد المالكي</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-header">رواد المعرفة وحلفاء النجاح</div>
+        <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="full-card">
+                <h4 class="highlight">الفئات والمحاور</h4>
+                <p><b>الفئات:</b> الشباب، الأكاديميون، الإعلاميون، طلبة الجامعات، موظفو الشركات العالمية.</p>
+                <p><b>المحاور:</b> الابتكار الرقمي، التاريخ، الفنون، الريادة، التنمية، السياحة، والرياضة.</p>
             </div>
-            <div class="glass-card">
-                <h3 style="color:var(--ted-red)">الراعي الذهبي</h3>
-                [span_4](start_span)<p>مساحة عرض مخصصة، حضور إعلاني مكثف عبر السوشيال ميديا، وتجهيز نقطة العرض[span_4](end_span).</p>
-                <h3 style="color:var(--ted-red)">الراعي المشارك</h3>
-                [span_5](start_span)<p>مساحة مرنة ومنصة عصرية للتفاعل المباشر والتواجد في لوحة الشرف[span_5](end_span).</p>
+            <div class="full-card">
+                <h4 class="highlight">حلفاء النجاح (9 جهات كبرى)</h4>
+                <p>فندق إيريديوم، آني وداني، وسام النبلاء للحراسات، جمعية نافع، مبادرة "احترم"، مجموعة بن مشرف، زهرة تانا، خوخ ومشمش، ورقة شاي.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-header">باقات الامتياز والرعاية</div>
+        <div class="full-card" style="border: 2px solid var(--ted-red); background: rgba(230,43,30,0.05);">
+            <h3 class="highlight">🌟 الشريك الاستراتيجي | 50,000 ريال</h3>
+            <p>مساحة واجهة الفعالية، إدراج الشعار في كافة المطبوعات، زيارات كبار الشخصيات، تكريم واحتفاء خاص على المسرح.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+            <div class="full-card">
+                <h4 class="highlight">🥇 الراعي الذهبي</h4>
+                <p>مساحة عرض، حضور إعلاني مكثف عبر السوشيال ميديا، وتجهيز نقطة العرض.</p>
+            </div>
+            <div class="full-card">
+                <h4 class="highlight">🤝 الراعي المشارك</h4>
+                <p>مساحة مرنة، منصة عصرية (بوث)، والتواجد ضمن لوحة الشرف.</p>
             </div>
         </div>
     </section>
 
     <footer>
-        [span_6](start_span)<p style="font-size: 2rem; font-weight: 300; margin-bottom: 50px;">"تيدكس عكاظ.. مصنع للإلهام ينطلق من عراقة الطائف ليعانق عنان السماء"[span_6](end_span)</p>
-        <div style="margin-bottom: 60px;">
-            <a href="tel:0551228804" class="btn-strong">حجز مقعد النجاح الآن</a>
+        <div class="full-card" style="border:none; background:none;">
+            <p style="font-size: 1.8rem; font-style: italic;">"تيدكس عكاظ ليس مجرد مسرح للأفكار، بل هو امتداد لتاريخنا المشرق، ومصنع للإلهام."</p>
+            <p class="highlight">د. فارس المالكي - الرئيس التنفيذي</p>
         </div>
-        <div style="color: #666;">
+        
+        <h2 style="font-size: 2.5rem; margin: 40px 0;">نداء عكاظ</h2>
+        <div style="font-size: 1.3rem; margin-bottom: 40px;">
             📞 0551228804 | 0559294764 <br>
-            📱 X: @tedx_okadh | @SofaraaUK | @m7twa_sa <br><br>
-            <small>This independent TEDx event is operated under license from TED. [span_7](start_span)© 2026 جميع الحقوق محفوظة لـ تيدكس عكاظ</small>[span_7](end_span)
+            📱 X: @tedx_okadh | @SofaraaUK | @m7twa_sa
         </div>
+        <a href="tel:0551228804" style="background:var(--ted-red); color:#fff; padding:20px 50px; border-radius:10px; text-decoration:none; font-weight:900; font-size:1.4rem;">انضم لرحلة النجاح</a>
+        
+        <p style="margin-top: 80px; color: #444; font-size: 0.8rem;">
+            This independent TEDx event is operated under license from TED. <br>
+            &copy; 2026 جميع الحقوق محفوظة لـ تيدكس عكاظ
+        </p>
     </footer>
 
     <script>
         const target = new Date("May 1, 2026 00:00:00").getTime();
-        function update() {
+        setInterval(() => {
             const now = new Date().getTime();
             const diff = target - now;
             document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
             document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
-        }
-        setInterval(update, 1000); update();
+        }, 1000);
     </script>
 </body>
 </html>
